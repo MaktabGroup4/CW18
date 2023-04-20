@@ -5,7 +5,7 @@ namespace Repository.Test
 {
     public interface IRepositoryMethods
     {
-        List<Book> BorrowedInState();
+        List<State> BorrowedInState();
         List<StatesMembers> GetMembers();
         List<Member> GetMembersBooks();
     }
