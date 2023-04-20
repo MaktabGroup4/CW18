@@ -1,0 +1,20 @@
+﻿@using App.Domain.DTOs;
+@model List<StatesMembers>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">State</th>
+            <th scope="col">Member</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.State.Name</td>
+                <td>@item.Members.FullName</td>
+            </tr>
+        }
+    </tbody>
+</table>

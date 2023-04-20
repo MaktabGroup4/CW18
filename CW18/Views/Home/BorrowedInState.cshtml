@@ -1,0 +1,34 @@
+﻿@using App.Domain.Entities;
+@model List<Book>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">State</th>
+            <th scope="col">Books</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @foreach (var member in item.MembersBooks)
+                    {
+                        <span>@member.Member.Address.City.State.Name</span>
+
+                        <span> * </span>
+                    }
+                </td>
+                <td>
+                    @foreach (var book in item.MembersBooks)
+                    {
+                        <span>@book.Book.Name</span>
+
+                        <span> * </span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
