@@ -22,10 +22,10 @@ namespace DataStorage
 
             modelBuilder.Entity<Member>(entity =>
             {
-                entity.Property(x => x.Mobile).HasMaxLength(12);
-                entity.HasOne(s => s.Address)
-                .WithOne(ad => ad.Member)
-            .HasForeignKey<Address>(s => s.Id);
+                entity.Property(m => m.Mobile).HasMaxLength(12);
+                entity.HasOne(m => m.Address)
+                .WithOne(a => a.Member)
+            .HasForeignKey<Address>(a => a.Id);
                 entity.HasData(new Member()
                 {
                     Id = 10,
@@ -46,9 +46,9 @@ namespace DataStorage
 
             modelBuilder.Entity<Address>(entity =>
             {
-                entity.HasOne(s => s.City)
-                .WithOne(ad => ad.Address)
-            .HasForeignKey<City>(s => s.Id);
+                entity.HasOne(a => a.City)
+                .WithOne(c => c.Address)
+            .HasForeignKey<City>(c => c.Id);
                 entity.HasData(new Address()
                 {
                     Id = 10,
@@ -64,7 +64,7 @@ namespace DataStorage
             modelBuilder.Entity<City>(entity =>
             {
                 entity.HasOne(c => c.State)
-                .WithOne(st => st.City)
+                .WithOne(s => s.City)
             .HasForeignKey<State>(s => s.Id);
                 entity.HasData(new City()
                 {
@@ -97,7 +97,7 @@ namespace DataStorage
             {
                 entity.HasOne(b => b.Genre)
                 .WithMany(g => g.Books)
-                .HasForeignKey(s => s.GenreId);
+                .HasForeignKey(b => b.GenreId);
                 entity.HasData(new Book()
                 {
                     Id = 1,
@@ -135,16 +135,16 @@ namespace DataStorage
                 });
             });
 
-            modelBuilder.Entity<MembersBook>().HasKey(sc => new { sc.MemberId, sc.BookId });
+            modelBuilder.Entity<MembersBook>().HasKey(mb => new { mb.MemberId, mb.BookId });
 
             modelBuilder.Entity<MembersBook>(entity =>
             {
-                entity.HasOne(sc => sc.Member)
-                .WithMany(s => s.MembersBooks)
-                .HasForeignKey(sc => sc.MemberId);
-                entity.HasOne(sc => sc.Book)
-                .WithMany(s => s.MembersBooks)
-                .HasForeignKey(sc => sc.BookId);
+                entity.HasOne(mb => mb.Member)
+                .WithMany(m => m.MembersBooks)
+                .HasForeignKey(mb => mb.MemberId);
+                entity.HasOne(mb => mb.Book)
+                .WithMany(b => b.MembersBooks)
+                .HasForeignKey(mb => mb.BookId);
                 entity.HasData(new MembersBook()
                 {
                     Id = 1,
